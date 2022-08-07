@@ -1,0 +1,29 @@
+server:
+  port: 8763
+
+spring:
+  application:
+    name: consumer
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+    sentinel:
+      transport:
+        port: 18763
+        dashboard: localhost:8748 # 配置sentinel的dashboard地址
+  zipkin:
+    sender:
+      type: web
+    base-url: http://localhost:9411/
+    service:
+      name: consumer
+  sleuth:
+    sampler:
+      probability: 1
+
+feign:
+  sentinel:
+    enabled: true  # 开启Feign和sentinel的自动适配
